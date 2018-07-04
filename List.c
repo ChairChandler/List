@@ -2,7 +2,22 @@
 #include <stdlib.h>
 #include "List.h"
 
-int clist_init(CList **head, int (*begpush) (CList *head,void *elem), void* (*begpop) (CList *head), int (*endpush) (CList *head,void *elem),
+static void* clist_pop(CList *head,int index);
+static int clist_push(CList *head,void *elem,int index);
+static void* clist_endpop(CList *head);
+static void* clist_begpop(CList *head);
+static void clist_del(CList *head);
+static int clist_size(CList *head);
+static void clist_print(CList *head);
+static int clist_endpush(CList *head,void *elem);
+static int clist_begpush(CList *head,void *elem);
+static int clist_init(CList **head, int (*begpush) (CList *head,void *elem), void* (*begpop) (CList *head), int (*endpush) (CList *head,void *elem),
+		void* (*endpop) (CList *head), int (*push) (CList *head,void *elem,int index), void* (*pop) (CList *head,int index),
+		int (*size) (CList *head), void (*del) (CList *head), void (*print) (CList *head));
+
+
+
+static int clist_init(CList **head, int (*begpush) (CList *head,void *elem), void* (*begpop) (CList *head), int (*endpush) (CList *head,void *elem),
 		void* (*endpop) (CList *head), int (*push) (CList *head,void *elem,int index), void* (*pop) (CList *head,int index),
 		int (*size) (CList *head), void (*del) (CList *head), void (*print) (CList *head)) {
 			
@@ -27,7 +42,7 @@ int clist_init(CList **head, int (*begpush) (CList *head,void *elem), void* (*be
 
 }
 
-int clist_begpush(CList *head,void *elem) {
+static int clist_begpush(CList *head,void *elem) {
 	
 	if(head->first==NULL)
 	{
@@ -61,7 +76,7 @@ int clist_begpush(CList *head,void *elem) {
 
 }
 
-int clist_endpush(CList *head,void *elem) {
+static int clist_endpush(CList *head,void *elem) {
 	
 	if( head->first == NULL) {
 		
@@ -81,7 +96,7 @@ int clist_endpush(CList *head,void *elem) {
 	
 }
 
-void clist_print(CList *head) {
+static void clist_print(CList *head) {
 	
 	LstElem *ptr;
 	ptr=head->first;
@@ -94,7 +109,7 @@ void clist_print(CList *head) {
 	return;
 }
 
-int clist_size(CList *head) {
+static int clist_size(CList *head) {
 	
 	if(head->iSize!=(-1))
 		return head->iSize;
@@ -114,7 +129,7 @@ int clist_size(CList *head) {
 	return count;
 }
 
-void clist_del(CList *head) {
+static void clist_del(CList *head) {
 	
 	LstElem *ptr,*ptrnxt;
 	ptr=head->first;
@@ -134,7 +149,7 @@ void clist_del(CList *head) {
 	return;
 }
 
-void* clist_begpop(CList *head) {
+static void* clist_begpop(CList *head) {
 	
 	if(head->first==NULL)
 		return NULL;
@@ -153,7 +168,7 @@ void* clist_begpop(CList *head) {
 	
 }
 
-void* clist_endpop(CList *head) {
+static void* clist_endpop(CList *head) {
 	
 	if(head->last==NULL)
 		return NULL;
@@ -187,7 +202,7 @@ void* clist_endpop(CList *head) {
 	
 }
 
-int clist_push(CList *head,void *elem,int index) {
+static int clist_push(CList *head,void *elem,int index) {
 	
 	int count;
 	LstElem *ptr,*hlptr,*nptr;
@@ -224,7 +239,7 @@ int clist_push(CList *head,void *elem,int index) {
 	
 }
 
-void* clist_pop(CList *head,int index) {
+static void* clist_pop(CList *head,int index) {
 	
 	int count;
 	LstElem *ptr,*hlptr;

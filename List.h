@@ -42,26 +42,4 @@ typedef struct CList_ {
 
 CList* clist_crt(void);
 
-void* clist_pop(CList *head,int index);
-
-int clist_push(CList *head,void *elem,int index);
-
-void* clist_endpop(CList *head);
-
-void* clist_begpop(CList *head);
-
-void clist_del(CList *head);
-
-int clist_size(CList *head);
-
-void clist_print(CList *head);
-
-int clist_endpush(CList *head,void *elem);
-
-int clist_begpush(CList *head,void *elem);
-
-int clist_init(CList **head, int (*begpush) (CList *head,void *elem), void* (*begpop) (CList *head), int (*endpush) (CList *head,void *elem),
-		void* (*endpop) (CList *head), int (*push) (CList *head,void *elem,int index), void* (*pop) (CList *head,int index),
-		int (*size) (CList *head), void (*del) (CList *head), void (*print) (CList *head));
-
 #endif
