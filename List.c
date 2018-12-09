@@ -38,14 +38,14 @@ static int clist_init       (CList **head,
  */
 
 static int clist_init(CList **head,
-                        int (*begpush) (CList *head,void *elem),
-                        void* (*begpop) (CList *head),
-                        int (*endpush) (CList *head,void *elem),
-                        void* (*endpop) (CList *head),
-                        int (*push) (CList *head,void *elem,size_t index),
-                        void* (*pop) (CList *head,size_t index),
-                        int (*size) (CList *head),
-                        void (*erase) (CList *head)) {
+                        int     (*begpush)  (CList *head, void *elem),
+                        void*   (*begpop)   (CList *head),
+                        int     (*endpush)  (CList *head, void *elem),
+                        void*   (*endpop)   (CList *head),
+                        int     (*push)     (CList *head, void *elem, size_t index),
+                        void*   (*pop)      (CList *head, size_t index),
+                        int     (*size)     (CList *head),
+                        void    (*erase)    (CList *head)) {
 
         if( ((*head)=(CList*)malloc(sizeof(CList))) == NULL)
                 return -1;
